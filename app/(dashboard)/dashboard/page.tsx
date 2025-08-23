@@ -61,7 +61,7 @@ export default function DashboardOverviewPage() {
               Welcome back, {session?.user?.name?.split(' ')[0]}!
             </h1>
             <p className="text-xl text-slate-600 dark:text-slate-400 mb-4">
-              Here's your premium store performance overview
+              Here&apos;s your premium store performance overview
             </p>
             <div className="flex items-center gap-2">
               <Crown className="w-5 h-5 text-yellow-500" />

@@ -4,6 +4,7 @@ import { useState, ChangeEvent, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { ImageIcon, Plus, Crown, Sparkles, Upload, DollarSign, Package, FileText, Tag } from 'lucide-react';
+import Image from 'next/image';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
@@ -206,11 +207,13 @@ export default function AddProductPage() {
                     <div className="flex flex-col items-center justify-center text-center">
                       {imagePreview ? (
                         <div className="relative group mb-6">
-                          <img
-                            src={imagePreview} 
-                            alt="Preview" 
-                            className="max-h-80 w-auto rounded-2xl shadow-2xl group-hover:scale-105 transition-transform duration-300" 
-                          />
+                          <Image
+  src={imagePreview}
+  alt="Preview"
+  width={400}   // ✅ আসল image এর size অনুযায়ী দিন
+  height={320}  // ✅ height-ও adjust করুন
+  className="max-h-80 w-auto rounded-2xl shadow-2xl group-hover:scale-105 transition-transform duration-300"
+/>
                           <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl flex items-center justify-center">
                             <div className="text-white font-semibold">Change Image</div>
                           </div>

@@ -4,6 +4,7 @@ import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { ImageIcon, Save, Crown, Sparkles, Upload, DollarSign, Package, FileText, Tag, Edit3 } from 'lucide-react';
+import Image from 'next/image';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
@@ -243,11 +244,13 @@ export default function UpdateProductPage() {
                         <h4 className="font-semibold text-slate-700 dark:text-slate-300 mb-4">Current Image</h4>
                         {imagePreview && (
                           <div className="relative group">
-                            <img 
-                              src={imagePreview} 
-                              alt="Current product image" 
-                              className="w-full max-h-80 object-cover rounded-2xl shadow-xl group-hover:scale-105 transition-transform duration-300" 
-                            />
+                            <Image
+  src={imagePreview}
+  alt="Current product image"
+  width={800}   // আপনার ডিজাইন অনুযায়ী approx width
+  height={320}  // max-h-80 মানে 320px
+  className="w-full object-cover rounded-2xl shadow-xl group-hover:scale-105 transition-transform duration-300"
+/>
                             <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl flex items-center justify-center">
                               <div className="text-white font-semibold text-center">
                                 <ImageIcon className="w-8 h-8 mx-auto mb-2" />

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Search, Sparkles, Crown, Filter, Star, Eye, ShoppingBag } from 'lucide-react';
 import toast from 'react-hot-toast';
+import Image from 'next/image';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
@@ -141,11 +142,13 @@ export default function ProductsPage() {
                        style={{animationDelay: `${0.4 + (index * 0.1)}s`}}>
                     {/* Product Image */}
                     <div className="relative overflow-hidden">
-                      <img 
-                        src={product.imageUrl} 
-                        alt={product.name} 
-                        className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700" 
-                      />
+                      <Image
+  src={product.imageUrl}
+  alt={product.name}
+  width={500}   // ইচ্ছামতো width
+  height={256}  // h-64 মানে 256px
+  className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
+/>
                       <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       
                       {/* Premium Badge */}

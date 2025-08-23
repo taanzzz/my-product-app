@@ -1,7 +1,7 @@
 
 import Link from 'next/link';
 import { 
-  Sparkles, Zap, Shield, Star, ArrowRight, TrendingUp, 
+  Sparkles,  Shield, Star, ArrowRight, TrendingUp, 
   Users, Award, Globe, Rocket, Crown, Diamond 
 } from 'lucide-react';
 
@@ -149,7 +149,7 @@ export default function HomePage() {
               Luxury Redefined
             </h2>
             <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-4xl mx-auto leading-relaxed">
-              We don't just sell products; we curate experiences that exceed the highest expectations
+              We don&apos;t just sell products; we curate experiences that exceed the highest expectations
             </p>
           </div>
           

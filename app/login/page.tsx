@@ -7,6 +7,7 @@ import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { useSession, signIn } from 'next-auth/react';
 import { Mail, Lock, Eye, EyeOff, Sparkles, Crown } from 'lucide-react';
+import Image from 'next/image';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -147,7 +148,13 @@ export default function LoginPage() {
             onClick={() => signIn('google', { callbackUrl: '/products' })}
             className="w-full flex items-center justify-center gap-4 py-4 px-6 glass-morphism border-2 border-transparent hover:border-blue-500/30 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-xl group"
           >
-            <img className="h-6 w-6" src="https://res.cloudinary.com/productssssss/image/upload/v1755916120/google_mqjmvo.png" alt="Google" />
+            <Image
+  src="https://res.cloudinary.com/productssssss/image/upload/v1755916120/google_mqjmvo.png"
+  alt="Google"
+  width={24}   // h-6 মানে 24px
+  height={24}  // w-6 মানে 24px
+  className="h-6 w-6"
+/>
             <span className="text-lg font-semibold text-slate-700 dark:text-slate-200 group-hover:gradient-text">
               Continue with Google
             </span>

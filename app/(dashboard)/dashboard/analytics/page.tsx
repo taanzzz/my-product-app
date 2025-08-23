@@ -1,6 +1,7 @@
 'use client';
 
 import { TrendingUp, DollarSign, Eye, ShoppingCart, BarChart, Users, Activity } from 'lucide-react';
+import Image from 'next/image';
 
 // Demo data
 const statsCards = [
@@ -70,7 +71,13 @@ export default function AnalyticsPage() {
           <ul className="space-y-4">
             {bestSellingProducts.map((product) => (
               <li key={product.id} className="flex items-center gap-4">
-                <img src={product.imageUrl} alt={product.name} className="w-12 h-12 object-cover rounded-lg" />
+                <Image
+  src={product.imageUrl}
+  alt={product.name}
+  width={48}
+  height={48}
+  className="object-cover rounded-lg"
+/>
                 <div className="flex-1">
                   <p className="font-semibold text-slate-800 dark:text-slate-100">{product.name}</p>
                   <p className="text-sm text-slate-500 dark:text-slate-400">{product.sales} sales</p>
@@ -89,7 +96,13 @@ export default function AnalyticsPage() {
           <ul className="space-y-4">
             {mostViewedProducts.map((product) => (
               <li key={product.id} className="flex items-center gap-4">
-                <img src={product.imageUrl} alt={product.name} className="w-12 h-12 object-cover rounded-lg" />
+                <Image
+  src={product.imageUrl}
+  alt={product.name}
+  width={48}
+  height={48}
+  className="object-cover rounded-lg"
+/>
                 <div className="flex-1">
                   <p className="font-semibold text-slate-800 dark:text-slate-100">{product.name}</p>
                   <p className="text-sm text-slate-500 dark:text-slate-400">{product.views} views</p>

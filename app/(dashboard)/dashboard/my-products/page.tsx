@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Edit, Trash2, Plus, Package, Crown, Sparkles, Eye, TrendingUp, Star, DollarSign } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
@@ -207,11 +208,13 @@ export default function MyProductsPage() {
                       <td className="p-6">
                         <div className="flex items-center gap-4">
                           <div className="relative">
-                            <img 
-                              src={product.imageUrl} 
-                              alt={product.name} 
-                              className="w-16 h-16 object-cover rounded-xl shadow-lg" 
-                            />
+                            <Image
+  src={product.imageUrl}
+  alt={product.name}
+  width={64}    // w-16 = 64px
+  height={64}   // h-16 = 64px
+  className="object-cover rounded-xl shadow-lg"
+/>
                             <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
                               <Crown className="w-3 h-3 text-white" />
                             </div>
@@ -269,11 +272,13 @@ export default function MyProductsPage() {
                      style={{animationDelay: `${index * 0.1}s`}}>
                   <div className="flex items-start gap-4 mb-4">
                     <div className="relative">
-                      <img 
-                        src={product.imageUrl} 
-                        alt={product.name} 
-                        className="w-20 h-20 object-cover rounded-xl shadow-lg" 
-                      />
+                      <Image
+  src={product.imageUrl}
+  alt={product.name}
+  width={80}   // w-20 = 80px
+  height={80}  // h-20 = 80px
+  className="object-cover rounded-xl shadow-lg"
+/>
                       <div className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
                         <Crown className="w-4 h-4 text-white" />
                       </div>
@@ -321,7 +326,7 @@ export default function MyProductsPage() {
             </div>
             <h3 className="text-3xl font-bold text-slate-600 dark:text-slate-400 mb-4">No Premium Products</h3>
             <p className="text-lg text-slate-500 dark:text-slate-400 mb-8 max-w-md mx-auto">
-              You haven't added any premium products yet. Create your first luxury listing to get started!
+              You haven&apos;t added any premium products yet. Create your first luxury listing to get started!
             </p>
             <Link href="/dashboard/add-product">
               <button className="premium-button text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-500 transform hover:scale-105 hover:shadow-xl shadow-lg">

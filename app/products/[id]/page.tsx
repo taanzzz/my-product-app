@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Star, Heart, ShoppingCart, Shield, Truck, RotateCcw, Check, ArrowLeft, Crown, Sparkles, Award } from 'lucide-react';
+import Image from 'next/image';
 
 
 type Product = {
@@ -72,7 +73,7 @@ export default async function ProductDetailsPage({ params }: { params: { id: str
           </div>
           <h1 className="text-5xl md:text-6xl font-bold font-poppins mb-6 gradient-text">Product Not Found</h1>
           <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed">
-            Sorry, we couldn't find the premium product you're looking for.
+            Sorry, we couldn&apos;t find the premium product you&apos;re looking for.
           </p>
           <Link href="/products">
             <button className="premium-button text-white px-12 py-5 rounded-3xl font-bold text-xl transition-all duration-500 transform hover:scale-110 hover:shadow-2xl shadow-xl">
@@ -111,11 +112,13 @@ export default async function ProductDetailsPage({ params }: { params: { id: str
             <div className="fade-in-up">
               <div className="premium-card glass-morphism rounded-3xl p-8 shadow-2xl">
                 <div className="relative">
-                  <img 
-                    src={product.imageUrl} 
-                    alt={product.name}
-                    className="w-full h-auto max-h-[600px] object-contain rounded-2xl shadow-xl"
-                  />
+                  <Image
+  src={product.imageUrl}
+  alt={product.name}
+  width={600}   // আপনার maximum width অনুযায়ী
+  height={600}  // max-h-[600px] অনুযায়ী
+  className="w-full h-auto object-contain rounded-2xl shadow-xl"
+/>
                   {/* Premium Badge */}
                   <div className="absolute top-4 left-4">
                     <div className="px-4 py-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-sm font-bold rounded-full shadow-xl flex items-center gap-2">
