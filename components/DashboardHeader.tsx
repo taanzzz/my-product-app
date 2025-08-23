@@ -18,7 +18,7 @@ export default function DashboardHeader({ setSidebarOpen }: DashboardHeaderProps
       </button>
       <div className="flex items-center gap-2">
          <ShoppingBag className="w-6 h-6 text-blue-500"/>
-         <span className="font-semibold">{session?.user?.name?.split(' ')[0]}'s Dashboard</span>
+         <span className="font-semibold">{session?.user?.name?.split(' ')[0]}&apos;s Dashboard</span>
       </div>
     </header>
   );

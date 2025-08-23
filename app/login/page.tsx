@@ -41,13 +41,12 @@ export default function LoginPage() {
       } else {
         throw new Error(data.message || 'Failed to login');
       }
-    } catch (error: any) {
-      toast.error(error.message, { id: 'login-toast' });
+    } catch (error) { // ✅ পরিবর্তন: any সরানো হয়েছে
+      toast.error((error as Error).message, { id: 'login-toast' });
     } finally {
       setIsLoading(false);
     }
   };
-
   return (
     <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
       {/* Premium Background */}

@@ -35,12 +35,13 @@ export default function RegisterPage() {
       } else {
         throw new Error(data.message || 'Failed to register');
       }
-    } catch (error: any) {
-      toast.error(error.message, { id: 'register-toast' });
+    } catch (error) { // ✅ পরিবর্তন: any সরানো হয়েছে
+      toast.error((error as Error).message);
     } finally {
       setIsLoading(false);
     }
   };
+
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">

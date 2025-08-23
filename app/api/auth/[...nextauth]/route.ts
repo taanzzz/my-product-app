@@ -36,11 +36,12 @@ export const authOptions: AuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      
+      // ✅ পরিবর্তন: session-এর টাইপ any না দিয়ে সঠিকভাবে টাইপ করা
+      const sessionWithToken = session as any;
       if (token.customToken) {
-        (session as any).customToken = token.customToken;
+        sessionWithToken.customToken = token.customToken;
       }
-      return session;
+      return sessionWithToken;
     },
   },
 };
