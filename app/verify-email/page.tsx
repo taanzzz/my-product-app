@@ -37,11 +37,19 @@ function VerifyEmailContent() {
         } else {
           throw new Error(data.message || 'Verification failed');
         }
-      } catch (error: any) {
-        setStatus('error');
-        setMessage(error.message);
-        toast.error(error.message);
-      }
+      } catch (error: unknown) {
+  setStatus('error');
+  // error-টি একটি Error অবজেক্ট কিনা তা চেক করা হচ্ছে
+  if (error instanceof Error) {
+    setMessage(error.message);
+    toast.error(error.message);
+  } else {
+    // যদি অন্য কিছু throw করা হয়, একটি সাধারণ মেসেজ দেখানো হচ্ছে
+    const fallbackMessage = 'An unexpected error occurred.';
+    setMessage(fallbackMessage);
+    toast.error(fallbackMessage);
+  }
+}
     };
 
     verifyToken();

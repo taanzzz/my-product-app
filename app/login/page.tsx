@@ -41,7 +41,7 @@ export default function LoginPage() {
       } else {
         throw new Error(data.message || 'Failed to login');
       }
-    } catch (error) { // ✅ পরিবর্তন: any সরানো হয়েছে
+    } catch (error) { 
       toast.error((error as Error).message, { id: 'login-toast' });
     } finally {
       setIsLoading(false);

@@ -87,11 +87,16 @@ export default function UpdateProductPage() {
       } else {
         throw new Error(result.message || 'Failed to update product.');
       }
-    } catch (error: any) {
-      toast.error(`❌ ${error.message}`);
-    } finally {
-      setIsLoading(false);
+    } catch (error: unknown) { // 'any' এর পরিবর্তে 'unknown' ব্যবহার করুন
+    // এররটি একটি অবজেক্ট কিনা এবং message প্রপার্টি আছে কিনা তা চেক করা হচ্ছে
+    if (error instanceof Error) {
+        toast.error(`❌ ${error.message}`);
+    } else {
+        toast.error('❌ An unknown error occurred.');
     }
+} finally {
+    setIsLoading(false);
+}
   };
   
   if (isLoading && !formData.name) {

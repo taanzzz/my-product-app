@@ -81,9 +81,16 @@ export default function MyProductsPage() {
         
         toast.success('Product deleted successfully!', { id: productId });
         fetchProducts(); 
-      } catch (error: any) {
-        toast.error(error.message || 'Could not delete the product.', { id: productId });
-      }
+      } catch (error: unknown) {
+  let errorMessage = 'Could not delete the product.';
+  
+  // error ভ্যারিয়েবলটি আসলেই একটি Error অবজেক্ট কিনা তা চেক করা হচ্ছে
+  if (error instanceof Error) {
+    errorMessage = error.message;
+  }
+  
+  toast.error(errorMessage, { id: productId });
+}
     }
   };
 

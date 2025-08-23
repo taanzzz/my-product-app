@@ -35,7 +35,7 @@ export default function RegisterPage() {
       } else {
         throw new Error(data.message || 'Failed to register');
       }
-    } catch (error) { // ✅ পরিবর্তন: any সরানো হয়েছে
+    } catch (error) { 
       toast.error((error as Error).message);
     } finally {
       setIsLoading(false);

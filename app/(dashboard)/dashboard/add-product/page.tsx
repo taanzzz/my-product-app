@@ -67,11 +67,16 @@ export default function AddProductPage() {
       } else {
         throw new Error(result.message || 'Failed to add product.');
       }
-    } catch (error: any) {
-      toast.error(`❌ ${error.message}`);
-    } finally {
-      setIsLoading(false);
+    } catch (error: unknown) { // 'any' এর পরিবর্তে 'unknown' ব্যবহার করুন
+    // এররটি একটি অবজেক্ট কিনা এবং message প্রপার্টি আছে কিনা তা চেক করা হচ্ছে
+    if (error instanceof Error) {
+        toast.error(`❌ ${error.message}`);
+    } else {
+        toast.error('❌ An unknown error occurred.');
     }
+} finally {
+    setIsLoading(false);
+}
   };
 
   return (
@@ -201,7 +206,7 @@ export default function AddProductPage() {
                     <div className="flex flex-col items-center justify-center text-center">
                       {imagePreview ? (
                         <div className="relative group mb-6">
-                          <img 
+                          <img
                             src={imagePreview} 
                             alt="Preview" 
                             className="max-h-80 w-auto rounded-2xl shadow-2xl group-hover:scale-105 transition-transform duration-300" 
