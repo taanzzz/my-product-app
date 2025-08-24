@@ -52,7 +52,7 @@ const testimonials = [
   {
     name: "Isabella Rodriguez",
     role: "Creative Director",
-    content: "I've never experienced such attention to detail. This is luxury shopping at its finest.",
+    content: "I&apos;ve never experienced such attention to detail. This is luxury shopping at its finest.",
     rating: 5,
     avatar: "IR",
     gradient: "from-rose-500 to-orange-500"
@@ -193,8 +193,9 @@ export default function HomePage() {
                     ))}
                   </div>
                   <blockquote className="text-lg text-gray-700 dark:text-gray-300 mb-8 italic font-light leading-relaxed">
-                    "{testimonial.content}"
-                  </blockquote>
+  {`"${testimonial.content}"`}
+</blockquote>
+
                   <div className="flex items-center">
                     <div className={`w-14 h-14 bg-gradient-to-br ${testimonial.gradient} rounded-2xl flex items-center justify-center text-white font-bold text-lg mr-4 shadow-lg`}>
                       {testimonial.avatar}

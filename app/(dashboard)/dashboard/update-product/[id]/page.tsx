@@ -3,7 +3,7 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import toast from 'react-hot-toast';
-import { ImageIcon, Save, Crown, Sparkles, Upload, DollarSign, Package, FileText, Tag, Edit3 } from 'lucide-react';
+import { ImageIcon, Save, Sparkles, Upload, DollarSign, Package, FileText, Tag, Edit3 } from 'lucide-react';
 import Image from 'next/image';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
@@ -39,6 +39,7 @@ export default function UpdateProductPage() {
           setImagePreview(imageUrl);
         }
       } catch (error) {
+        console.error(error);
         toast.error('Could not fetch product data.');
         router.push('/dashboard/my-products');
       } finally {

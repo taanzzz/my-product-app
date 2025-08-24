@@ -64,13 +64,15 @@ const Navbar = () => {
   };
 
   const handleLogout = async () => {
-    try {
-      localStorage.removeItem('token');
-      await signOut({ callbackUrl: '/' });
-    } catch (error) {
-      console.error('Logout error:', error);
-    }
-  };
+  try {
+    localStorage.removeItem('token');
+    await signOut({ redirect: false });
+    router.push('/'); // ✅ useRouter() এখন ব্যবহার হচ্ছে
+  } catch (error) {
+    console.error('Logout error:', error);
+  }
+};
+
 
   const isActivePath = (path) => {
     return pathname === path;

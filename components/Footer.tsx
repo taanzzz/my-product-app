@@ -29,7 +29,7 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed max-w-md">
-              Delivering unparalleled luxury experiences with the world's finest products. 
+              Delivering unparalleled luxury experiences with the world&apos;s finest products. 
               Your gateway to premium lifestyle since 2024.
             </p>
             <div className="flex space-x-4">

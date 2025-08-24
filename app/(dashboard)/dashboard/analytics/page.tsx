@@ -1,6 +1,6 @@
 'use client';
 
-import { TrendingUp, DollarSign, Eye, ShoppingCart, BarChart, Users, Activity } from 'lucide-react';
+import { TrendingUp, DollarSign, Eye, BarChart, Users, Activity } from 'lucide-react';
 import Image from 'next/image';
 
 // Demo data
@@ -31,7 +31,7 @@ export default function AnalyticsPage() {
           Product Analytics
         </h1>
         <p className="mt-2 text-slate-600 dark:text-slate-400">
-          Track your store's performance and growth.
+          Track your store&apos;s performance and growth.
         </p>
       </div>
 

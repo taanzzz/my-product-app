@@ -30,6 +30,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ message: 'Product added successfully', product: newProduct }, { status: 201 });
 
   } catch (error) {
+    console.error(error);
     return NextResponse.json({ message: 'Something went wrong' }, { status: 500 });
   }
 }

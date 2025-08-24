@@ -1,4 +1,4 @@
-import NextAuth, { type AuthOptions, type Session, type User } from "next-auth";
+import NextAuth, { type AuthOptions, type Session } from "next-auth";
 import { type JWT } from "next-auth/jwt";
 import GoogleProvider from "next-auth/providers/google";
 

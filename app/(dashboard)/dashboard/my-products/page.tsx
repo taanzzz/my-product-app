@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Edit, Trash2, Plus, Package, Crown, Sparkles, Eye, TrendingUp, Star, DollarSign } from 'lucide-react';
+import { Edit, Trash2, Plus, Package, Crown, Sparkles, Eye, Star, DollarSign } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
@@ -22,9 +22,10 @@ export default function MyProductsPage() {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  const fetchProducts = async () => {
+    // ✅ fetchProducts ফাংশনটিকে useCallback দিয়ে র‍্যাপ করা হয়েছে
+  const fetchProducts = useCallback(async () => {
+    setLoading(true);
     try {
-      
       const token = localStorage.getItem('token');
       if (!token) {
         toast.error("You are not logged in.");
@@ -34,7 +35,6 @@ export default function MyProductsPage() {
 
       const res = await fetch(`${API_BASE_URL}/api/products/my-products`, {
         headers: {
-          
           'Authorization': `Bearer ${token}`,
         },
       });
@@ -50,15 +50,16 @@ export default function MyProductsPage() {
         setProducts([]);
       }
     } catch (error) {
+      console.error(error);
       toast.error('Could not load your products.');
     } finally {
       setLoading(false);
     }
-  };
+  }, [router]); // <-- router-কে dependency হিসেবে যোগ করা হয়েছে
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [fetchProducts]); // <-- useEffect এখন সঠিকভাবে কাজ করবে
 
   const handleDelete = async (productId: string) => {
     if (window.confirm('Are you sure you want to delete this premium product?')) {

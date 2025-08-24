@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { 
   LayoutDashboard, Package, PlusSquare, BarChart2, ArrowLeftCircle, 
-  Crown, Sparkles, X
+  Crown, X
 } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 

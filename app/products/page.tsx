@@ -40,6 +40,7 @@ export default function ProductsPage() {
           setProducts([]);
         }
       } catch (error) {
+        console.error(error);
         toast.error('Could not load products.');
       } finally {
         setLoading(false);
