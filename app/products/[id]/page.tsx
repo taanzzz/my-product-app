@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Star, Heart, ShoppingCart, Shield, Truck, RotateCcw, Check, ArrowLeft, Crown, Sparkles, Award } from 'lucide-react';
 import Image from 'next/image';
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
 type Product = {
   _id: string;
@@ -10,31 +11,27 @@ type Product = {
   description: string;
   category: string;
   imageUrl: string;
-  
   features?: string[];
   rating?: number;
   reviews?: number;
 };
 
-
-async function getProductById(id: string): Promise<Product | undefined> {
+// ✅ সমাধান: এখন সরাসরি ব্যাকএন্ড থেকে একটি নির্দিষ্ট প্রোডাক্ট আনা হচ্ছে
+async function getProductById(id: string): Promise<Product | null> {
   try {
-    
-    const response = await fetch('http://localhost:5000/api/products', {
-      cache: 'no-store', 
+    const res = await fetch(`${API_BASE_URL}/api/products/${id}`, {
+      cache: 'no-store',
     });
 
-    if (!response.ok) {
-      throw new Error('Failed to fetch products');
+    if (!res.ok) {
+      return null;
     }
     
-    const responseData = await response.json();
+    const data = await res.json();
     
-    
-    if (responseData && Array.isArray(responseData.data)) {
-      const product = responseData.data.find((p: Product) => p._id === id);
-      
-      if (product) {
+    // ডেমো ডেটা যোগ করা হচ্ছে
+    if (data.success && data.data) {
+        const product = data.data;
         product.rating = 4.8;
         product.reviews = 256;
         product.features = [
@@ -43,14 +40,13 @@ async function getProductById(id: string): Promise<Product | undefined> {
           'All-day Battery Life',
           'Premium Build Quality'
         ];
-      }
-      return product;
+        return product;
     }
-    return undefined;
-    
+    return null;
+
   } catch (error) {
     console.error(`Error fetching product with id ${id}:`, error);
-    return undefined;
+    return null;
   }
 }
 
