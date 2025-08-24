@@ -2,17 +2,15 @@ import NextAuth, { type AuthOptions, type Session } from "next-auth";
 import { type JWT } from "next-auth/jwt";
 import GoogleProvider from "next-auth/providers/google";
 
-// ✅ Backend থেকে আসা রেসপন্সের জন্য একটি টাইপ
+// ✅ Backend-এর লাইভ URL এখন এনভায়রনমেন্ট ভ্যারিয়েবল থেকে আসবে
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+
 interface LoginResponse {
   token: string;
 }
-
-// ✅ NextAuth-এর JWT টাইপের সাথে আমাদের কাস্টম টোকেন যোগ করার জন্য
 interface CustomJWT extends JWT {
   customToken?: string;
 }
-
-// ✅ NextAuth-এর Session টাইপের সাথে আমাদের কাস্টম টোকেন যোগ করার জন্য
 interface CustomSession extends Session {
   customToken?: string;
 }
@@ -26,10 +24,11 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user, account }): Promise<CustomJWT> {
-      // ✅ এখানে token-কে CustomJWT হিসেবে টাইপ করা হয়েছে
       if (account && user) {
         try {
-          const response = await fetch('http://localhost:5000/api/users/google-login', {
+          // ✅✅✅ চূড়ান্ত সমাধান এখানেই ✅✅✅
+          // localhost-এর পরিবর্তে লাইভ API URL ব্যবহার করা হচ্ছে
+          const response = await fetch(`${API_BASE_URL}/api/users/google-login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -38,7 +37,6 @@ export const authOptions: AuthOptions = {
             }),
           });
           
-          // ✅ data-কে LoginResponse হিসেবে টাইপ করা হয়েছে
           const data: LoginResponse = await response.json();
 
           if (response.ok) {
@@ -46,14 +44,12 @@ export const authOptions: AuthOptions = {
           }
         } catch (error) {
           console.error("Error fetching custom token:", error);
-          // Return the original token on error
           return token as CustomJWT;
         }
       }
       return token as CustomJWT;
     },
     async session({ session, token }: { session: Session; token: CustomJWT }): Promise<CustomSession> {
-      // ✅ এখানে session এবং token উভয়েরই সঠিক টাইপ দেওয়া হয়েছে
       const sessionWithToken = session as CustomSession;
       if (token.customToken) {
         sessionWithToken.customToken = token.customToken;
