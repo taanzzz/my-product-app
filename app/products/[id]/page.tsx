@@ -16,7 +16,7 @@ type Product = {
   reviews?: number;
 };
 
-// ✅ সমাধান: এখন সরাসরি ব্যাকএন্ড থেকে একটি নির্দিষ্ট প্রোডাক্ট আনা হচ্ছে
+
 async function getProductById(id: string): Promise<Product | null> {
   try {
     const res = await fetch(`${API_BASE_URL}/api/products/${id}`, {
@@ -29,7 +29,7 @@ async function getProductById(id: string): Promise<Product | null> {
     
     const data = await res.json();
     
-    // ডেমো ডেটা যোগ করা হচ্ছে
+    
     if (data.success && data.data) {
         const product = data.data;
         product.rating = 4.8;
@@ -111,8 +111,8 @@ export default async function ProductDetailsPage({ params }: { params: { id: str
                   <Image
   src={product.imageUrl}
   alt={product.name}
-  width={600}   // আপনার maximum width অনুযায়ী
-  height={600}  // max-h-[600px] অনুযায়ী
+  width={600}   
+  height={600}  
   className="w-full h-auto object-contain rounded-2xl shadow-xl"
 />
                   {/* Premium Badge */}

@@ -1,4 +1,3 @@
-// ==================== LAYOUT.TSX ====================
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
