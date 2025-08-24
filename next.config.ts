@@ -1,13 +1,13 @@
-import { NextConfig } from 'next';
-
-const nextConfig: NextConfig = {
-  reactStrictMode: true,
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   images: {
-    domains: [
-      'res.cloudinary.com', // আপনার cloudinary host
-      // অন্য কোনো external image host থাকলে এখানে add করতে পারেন
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
     ],
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;

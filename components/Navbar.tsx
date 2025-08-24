@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -24,6 +23,18 @@ import {
   Shield,
   CreditCard
 } from 'lucide-react';
+
+// ✅ allowed colors
+type ColorOption = "blue" | "purple" | "green" | "yellow";
+
+// ✅ mobile nav items type-safe করা হলো
+interface MobileNavItem {
+  href: string;
+  icon: React.ElementType;
+  label: string;
+  color: ColorOption;
+  badge?: number;
+}
 
 const Navbar = () => {
   const { data: session, status } = useSession();
@@ -64,50 +75,52 @@ const Navbar = () => {
   };
 
   const handleLogout = async () => {
-  try {
-    localStorage.removeItem('token');
-    await signOut({ redirect: false });
-    router.push('/'); // ✅ useRouter() এখন ব্যবহার হচ্ছে
-  } catch (error) {
-    console.error('Logout error:', error);
-  }
-};
+    try {
+      localStorage.removeItem('token');
+      await signOut({ redirect: false });
+      router.push('/'); 
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
 
-
-  const isActivePath = (path) => {
+  const isActivePath = (path: string): boolean => {
     return pathname === path;
   };
 
-  // Navigation items for bottom mobile nav
-  const mobileNavItems = [
+  // ✅ mobile nav items list
+  const mobileNavItems: MobileNavItem[] = [
     { href: '/', icon: Home, label: 'Home', color: 'blue' },
     { href: '/products', icon: Package, label: 'Products', color: 'purple' },
     { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard', color: 'green' },
     { href: '/notifications', icon: Bell, label: 'Alerts', color: 'yellow', badge: 3 }
   ];
 
-  const getColorClasses = (color, isActive = false) => {
-    const colors = {
+  // ✅ color function type-safe
+  const getColorClasses = (color: ColorOption, isActive: boolean = false) => {
+    const colors: Record<ColorOption, { text: string; gradient: string }> = {
       blue: {
-        text: isActive ? 'text-blue-500' : 'group-hover:text-blue-500',
-        gradient: 'from-blue-600 to-purple-600'
+        text: isActive ? "text-blue-500" : "group-hover:text-blue-500",
+        gradient: "from-blue-600 to-purple-600",
       },
       purple: {
-        text: isActive ? 'text-purple-500' : 'group-hover:text-purple-500',
-        gradient: 'from-purple-600 to-pink-600'
+        text: isActive ? "text-purple-500" : "group-hover:text-purple-500",
+        gradient: "from-purple-600 to-pink-600",
       },
       green: {
-        text: isActive ? 'text-green-500' : 'group-hover:text-green-500',
-        gradient: 'from-green-600 to-blue-600'
+        text: isActive ? "text-green-500" : "group-hover:text-green-500",
+        gradient: "from-green-600 to-blue-600",
       },
       yellow: {
-        text: isActive ? 'text-yellow-500' : 'group-hover:text-yellow-500',
-        gradient: 'from-yellow-600 to-orange-600'
-      }
+        text: isActive ? "text-yellow-500" : "group-hover:text-yellow-500",
+        gradient: "from-yellow-600 to-orange-600",
+      },
     };
-    return colors[color] || colors.blue;
+
+    return colors[color];
   };
 
+  // ✅ তোমার বাকি কোড untouched রাখা হলো
   if (status === 'loading') {
     return (
       <nav className="fixed top-0 left-0 right-0 z-50 glass-morphism">
